@@ -1,7 +1,35 @@
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, redirect, url_for, request, jsonify, send_file
+from db import create_table, add_entry
 import sqlite3
 import pandas as pd
 import io
+
+app = Flask(__name__)
+create_table()
+@app.route('/')
+def index():
+    return render_template('index.html')
+@app.route('/add_user', methods=['POST'])
+def add_entry_route():
+    customer_account = request.form['customer_account']
+    sap_s8 = request.form['sap_s8']
+    hotel_inn_code = request.form['marsha_code']
+    starlink_code = request.form['starlink_code']
+    vaca_rental = request.form['vacation_rental']
+    trade = request.form['trade_name']
+    hotel_chain = request.form['hotel_chain']
+    affiliation = request.form['affiliation']
+    country = request.form['country']
+    street_number = request.form['street_number']
+    street_name = request.form['street_name']
+    zip_code = request.form['zip_code']
+    
+    add_entry(customer_account, sap_s8, hotel_inn_code, starlink_code, vaca_rental, 
+              trade, hotel_chain, affiliation, country, street_number, street_name, zip_code)
+    return redirect(url_for('index'))
+if __name__ == '__main__':
+    app.run(debug=True)
+            
 
 app = Flask(__name__, template_folder='../../frontend')
 
