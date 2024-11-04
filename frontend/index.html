@@ -9,184 +9,166 @@
 </head>
 <body>
     <div class="container">
-        <h1>Dormakaba X The Data Mine</h1>
-        
-        <!-- Upload Section -->
-        <div class="upload-section">
-            <h2>Bulk Upload</h2>
-            <div class="file-upload">
-                <input type="file" id="fileUpload" accept=".csv,.xlsx,.xls" class="file-input">
-                <label for="fileUpload" class="file-label">
-                    <span class="file-text">Choose a file or drag it here</span>
-                    <span class="file-button">Browse Files</span>
-                </label>
-            </div>
-            <div id="uploadMessage" class="message"></div>
-        </div>
+        <header class="header">
+            <h1>Dormakaba X The Data Mine</h1>
+        </header>
 
-        <!-- Single Entry Form -->
-        <form id="hotelForm" class="hotel-form">
-            <h2>Single Entry Form</h2>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <button class="tab-button active" onclick="showTab('upload')">Upload Data</button>
+                <button class="tab-button" onclick="showTab('data-manipulation')">Data Manipulation</button>
+            </aside>
+
+
+
+
+            <section id="data-manipulation" class="tab-content">
+                <div class="data-manipulation-header">
+                    <h2>Data Manipulation</h2>
+                    <button type="button" id="exportCsv" class="primary">Export CSV</button>
+                </div>
+                <div class="bottom-button-group">
+                    <button type="button" id="generateGraphs" class="primary">Generate Graphs</button>
+                </div>
+            </section>
             
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="customerAccount">Customer Account Number*</label>
-                    <input type="text" id="customerAccount" required>
-                </div>
+            
+            
 
-                <div class="form-group">
-                    <label for="sapS8">SAP S8*</label>
-                    <input type="text" id="sapS8" required>
-                </div>
 
-                <div class="form-group">
-                    <label for="hotelInnCode">Hotel Inn Code</label>
-                    <input type="text" id="hotelInnCode">
-                </div>
 
-                <div class="form-group">
-                    <label for="marshaCode">Marsha Code</label>
-                    <input type="text" id="marshaCode">
-                </div>
 
-                <div class="form-group">
-                    <label for="starlinkCode">Starlink Code</label>
-                    <input type="text" id="starlinkCode">
+            <section id="upload" class="tab-content active">
+                <!-- File Upload Section -->
+                <h2>Data Upload</h2>
+                <div class="file-upload">
+                    <input type="file" id="fileUpload" accept=".csv,.xlsx,.xls" class="file-input" style="display: none;">
+                    <label for="fileUpload" class="file-label">
+                        <span class="file-text">Choose a file or drag it here</span>
+                        <span class="file-button">Browse Files</span>
+                    </label>
                 </div>
+                <div id="uploadMessage" class="message"></div>
 
-                <div class="form-group">
-                    <label>Vacation Rental</label>
-                    <div class="radio-group">
-                        <label class="radio">
-                            <input type="radio" name="vacationRental" value="no" checked>
-                            <span>No</span>
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="vacationRental" value="yes">
-                            <span>Yes</span>
-                        </label>
+                <!-- Single Entry Form -->
+                <h2>Single Entry Form</h2>
+                <form id="singleEntryForm" class="single-entry-form">
+
+                    <div class="single-entry-container">
+                        <div class="form-group">
+                            <label for="customerAccount">Customer Account Number*</label>
+                            <input type="text" id="customerAccount" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sapS8">SAP S8*</label>
+                            <input type="text" id="sapS8" required>
+                        </div>
                     </div>
-                </div>
+                    
+                    <div class="single-entry-container">
+                        <div class="form-group">
+                            <label for="hotelInnCode">Hotel Inn Code*</label>
+                            <input type="text" id="hotelInnCode" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="marshaCode">Marsha Code*</label>
+                            <input type="text" id="marshaCode" required>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="tradeName">Trade Name</label>
-                    <input type="text" id="tradeName">
-                </div>
+                    <div class="single-entry-container">
+                        <div class="form-group">
+                            <label for="starlinkCode">Starlink Code*</label>
+                            <input type="text" id="starlinkCode" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tradeName">Trade Name*</label>
+                            <input type="text" id="tradeName" required>
+                        </div>
+                    </div>
+                    
 
-                <div class="form-group">
-                    <label for="hotelChain">Hotel Chain*</label>
-                    <input type="text" id="hotelChain" required>
-                </div>
+                    <div class="single-entry-container">
+                        <div class="form-group">
+                            <label for="hotelChain">Hotel Chain*</label>
+                            <input type="text" id="hotelChain" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="affiliation">Affiliation*</label>
+                            <input type="text" id="affiliation" required>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="affiliation">Affiliation</label>
-                    <input type="text" id="affiliation">
-                </div>
+                    <div class="form-group">
+                        <label for="address">Address*</label>
+                        <input type="text" id="streetNumber" placeholder="Street Number" required>
+                        <input type="text" id="streetDirection" placeholder="Street Direction" required>
+                        <input type="text" id="streetName" placeholder="Street Name" required>
+                        <input type="text" id="zipCode" placeholder="ZIP Code" required>
+                        <input type="text" id="country" placeholder="Country" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="country">Country*</label>
-                    <select id="country" required>
-                        <option value="">Select a country</option>
-                        <option value="United States">United States</option>
-                        <option value="Canada">Canada</option>
-                    </select>
-                </div>
-
-                <div class="form-group address-group">
-                    <label for="address">Address*</label>
-                    <input type="text" id="streetNumber" placeholder="Street Number">
-                    <input type="text" id="streetName" placeholder="Street Name">
-                    <input type="text" id="zipCode" placeholder="ZIP Code">
-                </div>
-            </div>
-
-            <div class="button-group">
-                <button type="submit" class="primary">Submit Entry</button>
-                <button type="button" id="exportCsv" class="secondary">Export CSV</button>
-                <button type="button" id="generateGraphs" class="secondary">Generate Graphs</button>
-            </div>
-        </form>
-
-        <div id="formMessage" class="message"></div>
+                    <div class="button-group">
+                        <button type="submit" class="primary">Submit Entry</button>
+                    </div>
+                </form>
+                <div id="formMessage" class="message"></div>
+            </section>
+        </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // File upload handling
-            const fileUpload = document.getElementById('fileUpload');
-            const uploadMessage = document.getElementById('uploadMessage');
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`.tab-button[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
 
-            fileUpload.addEventListener('change', async function(e) {
-                const file = e.target.files[0];
-                if (!file) return;
+        // Handle form submission
+        document.getElementById('singleEntryForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = {
+                customer_account: document.getElementById('customerAccount').value,
+                sap_s8: document.getElementById('sapS8').value,
+                hotel_inn_code: document.getElementById('hotelInnCode').value,
+                marsha_code: document.getElementById('marshaCode').value,
+                starlink_code: document.getElementById('starlinkCode').value,
+                trade_name: document.getElementById('tradeName').value,
+                hotel_chain: document.getElementById('hotelChain').value,
+                affiliation: document.getElementById('affiliation').value,
+                street_number: document.getElementById('streetNumber').value,
+                street_direction: document.getElementById('streetDirection').value,
+                street_name: document.getElementById('streetName').value,
+                zip_code: document.getElementById('zipCode').value,
+                country: document.getElementById('country').value
+            };
 
-                const formData = new FormData();
-                formData.append('file', file);
+            try {
+                const response = await fetch('/submit-entry', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                const result = await response.json();
+                document.getElementById('formMessage').textContent = result.message;
+                document.getElementById('formMessage').className = `message ${result.success ? 'success' : 'error'} show`;
+                if (result.success) this.reset();
+            } catch (error) {
+                document.getElementById('formMessage').textContent = 'Error submitting form';
+                document.getElementById('formMessage').className = 'message error show';
+            }
+        });
 
-                try {
-                    const response = await fetch('/upload-bulk', {
-                        method: 'POST',
-                        body: formData
-                    });
-                    const result = await response.json();
-                    
-                    uploadMessage.textContent = result.message;
-                    uploadMessage.className = `message ${result.success ? 'success' : 'error'} show`;
-                } catch (error) {
-                    uploadMessage.textContent = 'Error uploading file';
-                    uploadMessage.className = 'message error show';
-                }
-            });
+        // Export CSV
+        document.getElementById('exportCsv').addEventListener('click', function() {
+            window.location.href = '/export-csv';
+        });
 
-            // Form submission handling
-            const hotelForm = document.getElementById('hotelForm');
-            const formMessage = document.getElementById('formMessage');
-
-            hotelForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-
-                const formData = {
-                    customer_account: document.getElementById('customerAccount').value,
-                    sap_s8: document.getElementById('sapS8').value,
-                    hotel_inn_code: document.getElementById('hotelInnCode').value,
-                    marsha_code: document.getElementById('marshaCode').value,
-                    starlink_code: document.getElementById('starlinkCode').value,
-                    vacation_rental: document.querySelector('input[name="vacationRental"]:checked').value,
-                    trade_name: document.getElementById('tradeName').value,
-                    hotel_chain: document.getElementById('hotelChain').value,
-                    affiliation: document.getElementById('affiliation').value,
-                    country: document.getElementById('country').value,
-                    street_number: document.getElementById('streetNumber').value,
-                    street_name: document.getElementById('streetName').value,
-                    zip_code: document.getElementById('zipCode').value
-                };
-
-                try {
-                    const response = await fetch('/submit', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(formData)
-                    });
-                    const result = await response.json();
-                    
-                    formMessage.textContent = result.message;
-                    formMessage.className = `message ${result.success ? 'success' : 'error'} show`;
-                    
-                    if (result.success) {
-                        hotelForm.reset();
-                    }
-                } catch (error) {
-                    formMessage.textContent = 'Error submitting form';
-                    formMessage.className = 'message error show';
-                }
-            });
-
-            // Export CSV handling
-            document.getElementById('exportCsv').addEventListener('click', function() {
-                window.location.href = '/export-csv';
-            });
+        // Generate Graphs
+        document.getElementById('generateGraphs').addEventListener('click', function() {
+            fetch('/generate-graphs');
         });
     </script>
 </body>
