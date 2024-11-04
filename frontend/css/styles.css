@@ -1,104 +1,236 @@
-html, body {
+* {
+    box-sizing: border-box;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #f6f7fb 0%, #edf1f7 100%);
+    color: #2d3748;
     min-height: 100vh;
-    background-color: #000020;
-    color: white;
-    font-family: Arial, sans-serif;
+    padding: 2rem;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    font-size: 2.5em;
+    font-size: 2.25rem;
+    font-weight: 700;
     text-align: center;
-    margin-bottom: 30px;
-    color: #fff;
+    margin-bottom: 2.5rem;
+    color: #1a365d;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #2d3748;
+}
+
+.upload-section {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.file-upload {
+    position: relative;
+    width: 100%;
+    min-height: 120px;
+    border: 2px dashed #cbd5e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.file-upload:hover {
+    border-color: #4299e1;
+}
+
+.file-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.file-text {
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+.file-button {
+    padding: 0.5rem 1rem;
+    background-color: #4299e1;
+    color: white;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
 }
 
 .hotel-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form-grid {
     display: grid;
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
+}
+
+.address-group {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
 }
 
 label {
-    font-weight: bold;
-    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #4a5568;
 }
 
 input, select {
-    padding: 10px;
-    border: 1px solid #333;
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 16px;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
 }
 
 input:focus, select:focus {
     outline: none;
-    border-color: #4a90e2;
-    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+}
+
+.radio-group {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.radio {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.radio input {
+    width: auto;
 }
 
 .button-group {
     display: flex;
-    gap: 10px;
+    gap: 1rem;
     justify-content: center;
-    margin-top: 20px;
+    flex-wrap: wrap;
 }
 
 button {
-    padding: 12px 24px;
-    background-color: #4a90e2;
-    color: white;
+    padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.2s;
+    transition: all 0.3s ease;
+}
+
+.primary {
+    background: #4299e1;
+    color: white;
+}
+
+.secondary {
+    background: #edf2f7;
+    color: #2d3748;
 }
 
 button:hover {
-    background-color: #357abd;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.primary:hover {
+    background: #3182ce;
+}
+
+.secondary:hover {
+    background: #e2e8f0;
 }
 
 .message {
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 4px;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
     text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.message.show {
+    opacity: 1;
 }
 
 .message.success {
-    background-color: rgba(40, 167, 69, 0.2);
-    color: #28a745;
+    background: #c6f6d5;
+    color: #2f855a;
 }
 
 .message.error {
-    background-color: rgba(220, 53, 69, 0.2);
-    color: #dc3545;
+    background: #fed7d7;
+    color: #c53030;
 }
 
-/* Algolia Places Autocomplete Customization */
-.ap-input {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    color: white !important;
-}
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
 
-.ap-suggestion {
-    color: #333;
+    .container {
+        padding: 1.5rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
 }
