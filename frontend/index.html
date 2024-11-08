@@ -57,46 +57,46 @@
 
                     <div class="single-entry-container">
                         <div class="form-group">
-                            <label for="customerAccount">Customer Account Number*</label>
-                            <input type="text" id="customerAccount" required>
+                            <label for="customerAccount">Customer Account Number</label>
+                            <input type="text" id="customerAccount">
                         </div>
                         <div class="form-group">
-                            <label for="sapS8">SAP S8*</label>
-                            <input type="text" id="sapS8" required>
+                            <label for="sapS8">SAP S8</label>
+                            <input type="text" id="sapS8">
                         </div>
                     </div>
                     
                     <div class="single-entry-container">
                         <div class="form-group">
-                            <label for="hotelInnCode">Hotel Inn Code*</label>
-                            <input type="text" id="hotelInnCode" required>
+                            <label for="hotelInnCode">Hotel Inn Code</label>
+                            <input type="text" id="hotelInnCode">
                         </div>
                         <div class="form-group">
-                            <label for="marshaCode">Marsha Code*</label>
-                            <input type="text" id="marshaCode" required>
+                            <label for="marshaCode">Marsha Code</label>
+                            <input type="text" id="marshaCode">
                         </div>
                     </div>
 
                     <div class="single-entry-container">
                         <div class="form-group">
-                            <label for="starlinkCode">Starlink Code*</label>
-                            <input type="text" id="starlinkCode" required>
+                            <label for="starlinkCode">Starlink Code</label>
+                            <input type="text" id="starlinkCode">
                         </div>
                         <div class="form-group">
-                            <label for="tradeName">Trade Name*</label>
-                            <input type="text" id="tradeName" required>
+                            <label for="tradeName">Trade Name</label>
+                            <input type="text" id="tradeName">
                         </div>
                     </div>
                     
 
                     <div class="single-entry-container">
                         <div class="form-group">
-                            <label for="hotelChain">Hotel Chain*</label>
-                            <input type="text" id="hotelChain" required>
+                            <label for="hotelChain">Hotel Chain</label>
+                            <input type="text" id="hotelChain">
                         </div>
                         <div class="form-group">
-                            <label for="affiliation">Affiliation*</label>
-                            <input type="text" id="affiliation" required>
+                            <label for="affiliation">Affiliation</label>
+                            <input type="text" id="affiliation">
                         </div>
                     </div>
 
@@ -129,15 +129,43 @@
         // Handle form submission
         document.getElementById('singleEntryForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+
+            // Check if required address fields are filled and show specific error messages
+            const addressFields = {
+                streetNumber: 'Street Number is required.',
+                streetDirection: 'Street Direction is required.',
+                streetName: 'Street Name is required.',
+                zipCode: 'ZIP Code is required.',
+                country: 'Country is required.'
+            };
+            
+            let addressValid = true;
+            let errorMessage = '';
+
+            for (const [id, message] of Object.entries(addressFields)) {
+                const field = document.getElementById(id);
+                if (!field.value.trim()) {
+                    addressValid = false;
+                    errorMessage += `${message}\n`;
+                }
+            }
+
+            if (!addressValid) {
+                document.getElementById('formMessage').textContent = errorMessage;
+                document.getElementById('formMessage').className = 'message error show';
+                return;
+            }
+
+            // Create formData with null for empty fields
             const formData = {
-                customer_account: document.getElementById('customerAccount').value,
-                sap_s8: document.getElementById('sapS8').value,
-                hotel_inn_code: document.getElementById('hotelInnCode').value,
-                marsha_code: document.getElementById('marshaCode').value,
-                starlink_code: document.getElementById('starlinkCode').value,
-                trade_name: document.getElementById('tradeName').value,
-                hotel_chain: document.getElementById('hotelChain').value,
-                affiliation: document.getElementById('affiliation').value,
+                customer_account: document.getElementById('customerAccount').value || null,
+                sap_s8: document.getElementById('sapS8').value || null,
+                hotel_inn_code: document.getElementById('hotelInnCode').value || null,
+                marsha_code: document.getElementById('marshaCode').value || null,
+                starlink_code: document.getElementById('starlinkCode').value || null,
+                trade_name: document.getElementById('tradeName').value || null,
+                hotel_chain: document.getElementById('hotelChain').value || null,
+                affiliation: document.getElementById('affiliation').value || null,
                 street_number: document.getElementById('streetNumber').value,
                 street_direction: document.getElementById('streetDirection').value,
                 street_name: document.getElementById('streetName').value,
@@ -160,6 +188,8 @@
                 document.getElementById('formMessage').className = 'message error show';
             }
         });
+
+
 
         // Export CSV
         document.getElementById('exportCsv').addEventListener('click', function() {
