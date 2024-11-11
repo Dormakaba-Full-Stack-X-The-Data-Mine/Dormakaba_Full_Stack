@@ -3,297 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dormakaba Data Management</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-blue: #2563eb;
-            --hover-blue: #1d4ed8;
-            --light-gray: #f3f4f6;
-            --border-gray: #e5e7eb;
-            --text-gray: #6b7280;
-            --heading-color: #111827;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
-
-        body {
-            background-color: white;
-            color: var(--heading-color);
-            line-height: 1.5;
-        }
-
-        .navbar {
-            background: white;
-            padding: 1rem 2rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--heading-color);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 6rem auto 2rem;
-            padding: 0 2rem;
-        }
-
-        .hero {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--heading-color);
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            color: var(--text-gray);
-            font-size: 1.125rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-container {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            padding: 2rem;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: var(--heading-color);
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-gray);
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.15s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
-        }
-
-        .button-group {
-            grid-column: 1 / -1;
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-            margin-top: 2rem;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            font-weight: 500;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: var(--primary-blue);
-            color: white;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background: var(--hover-blue);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--heading-color);
-            border: 1px solid var(--border-gray);
-        }
-
-        .btn-secondary:hover {
-            background: var(--light-gray);
-        }
-
-        .message {
-            padding: 1rem;
-            border-radius: 6px;
-            margin-top: 1rem;
-            text-align: center;
-        }
-
-        .message.success {
-            background-color: #ecfdf5;
-            color: #059669;
-        }
-
-        .message.error {
-            background-color: #fef2f2;
-            color: #dc2626;
-        }
-
-        .floating-actions {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .floating-btn {
-            width: 3.5rem;
-            height: 3.5rem;
-            border-radius: 50%;
-            background: white;
-            border: 1px solid var(--border-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .floating-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.1);
-        }
-
-        .required::after {
-            content: "*";
-            color: #dc2626;
-            margin-left: 0.25rem;
-        }
-
-        /* Algolia Places Custom Styling */
-        .ap-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-gray);
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-
-        .ap-suggestion {
-            padding: 0.75rem;
-        }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/places.js/1.19.0/places.min.js"></script>
+    <title>Dormakaba X The Data Mine</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/inter.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">Dormakaba</div>
-    </nav>
-
     <div class="container">
-        <div class="hero">
-            <h1>Hotel Data Management</h1>
-            <p>Enter and manage your hotel information in our centralized database system</p>
-        </div>
+        <header class="header">
+            <h1>Dormakaba X The Data Mine</h1>
+        </header>
 
-        <form id="hotelForm" class="form-container">
-            <div class="form-grid">
-                <div class="form-group">
-                    <label class="required" for="customer_account">Customer Account Number</label>
-                    <input type="number" id="customer_account" required>
-                </div>
+        <div class="main-content">
+            <aside class="sidebar">
+                <button class="tab-button active" onclick="showTab('upload')">Upload Data</button>
+                <button class="tab-button" onclick="showTab('data-manipulation')">Data Manipulation</button>
+            </aside>
 
-                <div class="form-group">
-                    <label class="required" for="sap_s8">SAP S8</label>
-                    <input type="number" id="sap_s8" required>
+            <section id="data-manipulation" class="tab-content">
+                <div class="data-manipulation-header">
+                    <h2>Data Manipulation</h2>
+                    <button type="button" id="exportCsv" class="primary">Export CSV</button>
                 </div>
+                <div class="bottom-button-group">
+                    <button type="button" id="generateGraphs" class="primary">Generate Graphs</button>
+                </div>
+            </section>
 
-                <div class="form-group">
-                    <label for="hotel_inn_code">Hotel Inn Code</label>
-                    <input type="text" id="hotel_inn_code">
+            <section id="upload" class="tab-content active">
+                <h2>Data Upload</h2>
+                <div class="file-upload">
+                    <input type="file" id="fileUpload" accept=".csv,.xlsx,.xls" class="file-input" style="display: none;">
+                    <label for="fileUpload" class="file-label">
+                        <span class="file-text">Choose a file or drag it here</span>
+                        <span class="file-button">Browse Files</span>
+                    </label>
                 </div>
+                <div id="uploadMessage" class="message"></div>
 
-                <div class="form-group">
-                    <label for="marsha_code">Marsha Code</label>
-                    <input type="text" id="marsha_code">
-                </div>
+                <h2>Single Entry Form</h2>
+                <form id="singleEntryForm" class="single-entry-form">
+                    <div class="single-entry-container">
+                        <div class="form-group">
+                            <label for="customerAccount">Customer Account Number</label>
+                            <input type="text" id="customerAccount">
+                        </div>
+                        <div class="form-group">
+                            <label for="sapS8">SAP S8</label>
+                            <input type="text" id="sapS8">
+                        </div>
+                    </div>
+                    
+                    <div class="single-entry-container">
+                        <div class="form-group">
+                            <label for="hotelInnCode">Hotel Inn Code</label>
+                            <input type="text" id="hotelInnCode">
+                        </div>
+                        <div class="form-group">
+                            <label for="marshaCode">Marsha Code</label>
+                            <input type="text" id="marshaCode">
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="starlink_code">Starlink Code</label>
-                    <input type="text" id="starlink_code">
-                </div>
+                    <div class="single-entry-container">
+                        <div class="form-group">
+                            <label for="starlinkCode">Starlink Code</label>
+                            <input type="text" id="starlinkCode">
+                        </div>
+                        <div class="form-group">
+                            <label for="tradeName">Trade Name</label>
+                            <input type="text" id="tradeName">
+                        </div>
+                    </div>
+                    
+                    <div class="single-entry-container">
+                        <div class="form-group">
+                            <label for="hotelChain">Hotel Chain</label>
+                            <input type="text" id="hotelChain">
+                        </div>
+                        <div class="form-group">
+                            <label for="affiliation">Affiliation</label>
+                            <input type="text" id="affiliation">
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="vacation_rental">Vacation Rental</label>
-                    <select id="vacation_rental">
-                        <option value="false">No</option>
-                        <option value="true">Yes</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="trade_name">Trade Name</label>
-                    <input type="text" id="trade_name">
-                </div>
-
-                <div class="form-group">
-                    <label class="required" for="hotel_chain">Hotel Chain</label>
-                    <input type="text" id="hotel_chain" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="affiliation">Affiliation</label>
-                    <input type="text" id="affiliation">
-                </div>
-
-                <div class="form-group">
-                    <label class="required" for="country">Country</label>
-                    <select id="country" required>
-                        <option value="">Select a country</option>
-                        <option value="USA">United States</option>
-                        <option value="CAN">Canada</option>
-                        <option value="MEX">Mexico</option>
-                        <option value="GBR">United Kingdom</option>
-                        <option value="FRA">France</option>
-                        <option value="DEU">Germany</option>
-                    </select>
-                </div>
-
-                <div class="form-group" style="grid-column: 1 / -1;">
-                    <label class="required" for="address">Address</label>
-                    <input type="text" id="address" placeholder="Start typing to see suggestions" required>
-                </div>
+                    <div class="form-group">
+                        <label for="address">Address*</label>
+                        <input type="text" id="streetNumber" placeholder="Street Number" required>
+                        <input type="text" id="streetDirection" placeholder="Street Direction" required>
+                        <input type="text" id="streetName" placeholder="Street Name" required>
+                        <input type="text" id="zipCode" placeholder="ZIP Code" required>
+                        <input type="text" id="country" placeholder="Country" required>
+                    </div>
 
                 <div class="button-group">
                     <button type="submit" class="btn btn-primary">
@@ -336,60 +136,90 @@
     </div>
 
     <script>
-        // Initialize address autocomplete
-        const placesAutocomplete = places({
-            appId: 'YOUR_ALGOLIA_APP_ID',
-            apiKey: 'YOUR_ALGOLIA_API_KEY',
-            container: document.querySelector('#address')
-        });
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`.tab-button[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
 
-        // Form submission handler
-        document.getElementById('hotelForm').addEventListener('submit', async (e) => {
+        // Handle form submission with specific error messages
+        document.getElementById('singleEntryForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+
+            // Check if required address fields are filled and show specific error messages
+            const addressFields = {
+                streetNumber: 'Street Number is required.',
+                streetDirection: 'Street Direction is required.',
+                streetName: 'Street Name is required.',
+                zipCode: 'ZIP Code is required.',
+                country: 'Country is required.'
+            };
             
+            let addressValid = true;
+            let errorMessage = '';
+
+            for (const [id, message] of Object.entries(addressFields)) {
+                const field = document.getElementById(id);
+                if (!field.value.trim()) {
+                    addressValid = false;
+                    errorMessage += `${message}\n`;
+                }
+            }
+
+            if (!addressValid) {
+                document.getElementById('formMessage').textContent = errorMessage;
+                document.getElementById('formMessage').className = 'message error show';
+                return;
+            }
+
+            // Create formData with null for empty fields
             const formData = {
-                customer_account: document.getElementById('customer_account').value,
-                sap_s8: document.getElementById('sap_s8').value,
-                hotel_inn_code: document.getElementById('hotel_inn_code').value,
-                marsha_code: document.getElementById('marsha_code').value,
-                starlink_code: document.getElementById('starlink_code').value,
-                vacation_rental: document.getElementById('vacation_rental').value === 'true',
-                trade_name: document.getElementById('trade_name').value,
-                hotel_chain: document.getElementById('hotel_chain').value,
-                affiliation: document.getElementById('affiliation').value,
-                country: document.getElementById('country').value,
-                street_number: '',
-                street_name: '',
-                zip_code: ''
+                customer_account: document.getElementById('customerAccount').value || null,
+                sap_s8: document.getElementById('sapS8').value || null,
+                hotel_inn_code: document.getElementById('hotelInnCode').value || null,
+                marsha_code: document.getElementById('marshaCode').value || null,
+                starlink_code: document.getElementById('starlinkCode').value || null,
+                trade_name: document.getElementById('tradeName').value || null,
+                hotel_chain: document.getElementById('hotelChain').value || null,
+                affiliation: document.getElementById('affiliation').value || null,
+                street_number: document.getElementById('streetNumber').value,
+                street_direction: document.getElementById('streetDirection').value,
+                street_name: document.getElementById('streetName').value,
+                zip_code: document.getElementById('zipCode').value,
+                country: document.getElementById('country').value
             };
 
             try {
-                const response = await fetch('/insert', {
+                const response = await fetch('/submit-entry', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
 
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
                 const result = await response.json();
-                
-                const messageElement = document.getElementById('message');
-                messageElement.textContent = result.message;
-                messageElement.className = `message ${result.success ? 'success' : 'error'}`;
+                document.getElementById('formMessage').textContent = result.message;
+                document.getElementById('formMessage').className = `message ${result.success ? 'success' : 'error'} show`;
+                if (result.success) this.reset();
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Form submission error:', error);
+                document.getElementById('formMessage').textContent = 'Error submitting form';
+                document.getElementById('formMessage').className = 'message error show';
             }
         });
 
-        // Export CSV handler
-        document.getElementById('exportCsv').addEventListener('click', () => {
+        // Export CSV
+        document.getElementById('exportCsv').addEventListener('click', function() {
             window.location.href = '/export-csv';
         });
 
-        // Graph generation handler
-        document.getElementById('generateGraphs').addEventListener('click', () => {
-            // Add your graph generation logic here
+        // Generate Graphs
+        document.getElementById('generateGraphs').addEventListener('click', function() {
+            fetch('/generate-graphs');
         });
     </script>
 

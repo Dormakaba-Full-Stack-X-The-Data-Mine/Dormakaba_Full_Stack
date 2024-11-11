@@ -1,0 +1,244 @@
+/* Reset and Layout */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    background-color: #f8f9fa;
+    padding: 10px;
+    text-align: center;
+}
+
+.tab-button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f8fa;
+    color: #2d3748;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.header {
+    padding: 20px;
+    background-color: #1a365d;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.main-content {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #edf2f7;
+    width: 200px;
+    min-height: 100%;
+}
+
+.tab-button {
+    padding: 10px 15px;
+    background: #edf2f7;
+    color: #2d3748;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background 0.3s;
+}
+
+.tab-button.active {
+    background: #4299e1;
+    color: #ffffff;
+}
+
+.tab-button:hover {
+    background: #e2e8f0;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* File Upload */
+.file-upload {
+    position: relative;
+    width: 100%;
+    padding: 40px;
+    border: 2px dashed #cbd5e0;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.single-entry-form {
+    position: relative;
+    width: 100%;
+    padding: 40px;
+    border: 2px dashed #cbd5e0;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.file-label {
+    color: #718096;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.file-button {
+    background-color: #4299e1;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.single-entry-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 105px;
+}
+
+/* Aligns the Data Manipulation header and Export CSV button */
+.data-manipulation-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Positions the button to the right of the heading */
+    margin-bottom: 20px; /* Adds space below the heading section */
+}
+
+.data-manipulation-header h2 {
+    margin: 0; /* Removes default margin on h2 */
+}
+
+.bottom-button-group {
+    display: flex;
+    justify-content: center; /* Center-aligns the Generate Graphs button */
+    margin-top: 10px;
+}
+
+
+.button-group {
+    display: flex;
+    justify-content: center; /* Center-aligns the buttons */
+    gap: 10px; /* Adds spacing between buttons */
+    margin-top: 15px; /* Adds space above the button group */
+}
+
+/* Graph Container */
+.graph-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    text-align: center;
+    padding: 20px;
+    color: #718096;
+}
+
+/* Messages */
+.message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.message.success {
+    background: #c6f6d5;
+    color: #2f855a;
+}
+
+.message.error {
+    background: #fed7d7;
+    color: #c53030;
+}
+
+/* Primary Button */
+.primary {
+    padding: 10px 20px;
+    background: #4299e1;
+    color: #ffffff;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.primary:hover {
+    background: #3182ce;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .tab-button {
+        width: 100%;
+        margin-bottom: 0;
+    }
+}

@@ -35,7 +35,8 @@ def add_user():
                   country, street_number, street_name, zip_code)
         return redirect(url_for('index'))
     except Exception as e:
-        return jsonify({"success": False, "message": str(e)}), 400
+        print("Database insertion error:", e)
+        return jsonify({'message': 'Error inserting entry into the database.', 'success': False}), 500
 
 @app.route('/export-csv')
 def export_csv():
