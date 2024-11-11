@@ -13,15 +13,11 @@
             <h1>Dormakaba X The Data Mine</h1>
         </header>
 
-
         <div class="main-content">
             <aside class="sidebar">
                 <button class="tab-button active" onclick="showTab('upload')">Upload Data</button>
                 <button class="tab-button" onclick="showTab('data-manipulation')">Data Manipulation</button>
             </aside>
-
-
-
 
             <section id="data-manipulation" class="tab-content">
                 <div class="data-manipulation-header">
@@ -32,15 +28,8 @@
                     <button type="button" id="generateGraphs" class="primary">Generate Graphs</button>
                 </div>
             </section>
-            
-            
-            
-
-
-
 
             <section id="upload" class="tab-content active">
-                <!-- File Upload Section -->
                 <h2>Data Upload</h2>
                 <div class="file-upload">
                     <input type="file" id="fileUpload" accept=".csv,.xlsx,.xls" class="file-input" style="display: none;">
@@ -51,10 +40,8 @@
                 </div>
                 <div id="uploadMessage" class="message"></div>
 
-                <!-- Single Entry Form -->
                 <h2>Single Entry Form</h2>
                 <form id="singleEntryForm" class="single-entry-form">
-
                     <div class="single-entry-container">
                         <div class="form-group">
                             <label for="customerAccount">Customer Account Number</label>
@@ -88,7 +75,6 @@
                         </div>
                     </div>
                     
-
                     <div class="single-entry-container">
                         <div class="form-group">
                             <label for="hotelChain">Hotel Chain</label>
@@ -126,7 +112,7 @@
             document.querySelector(`.tab-button[onclick="showTab('${tabId}')"]`).classList.add('active');
         }
 
-        // Handle form submission
+        // Handle form submission with specific error messages
         document.getElementById('singleEntryForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
@@ -179,17 +165,21 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
                 const result = await response.json();
                 document.getElementById('formMessage').textContent = result.message;
                 document.getElementById('formMessage').className = `message ${result.success ? 'success' : 'error'} show`;
                 if (result.success) this.reset();
             } catch (error) {
+                console.error('Form submission error:', error);
                 document.getElementById('formMessage').textContent = 'Error submitting form';
                 document.getElementById('formMessage').className = 'message error show';
             }
         });
-
-
 
         // Export CSV
         document.getElementById('exportCsv').addEventListener('click', function() {

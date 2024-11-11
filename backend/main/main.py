@@ -5,9 +5,9 @@ import os
 
 app = Flask(__name__)
 
-# Initialize SQLite database
+# Initialize SQLite database with an updated schema
 def init_db():
-    with sqlite3.connect('data.db') as conn:
+    with sqlite3.connect('database.db') as conn:
         cursor = conn.cursor()
         cursor.execute('''CREATE TABLE IF NOT EXISTS entries (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -20,6 +20,7 @@ def init_db():
             hotel_chain TEXT,
             affiliation TEXT,
             street_number TEXT,
+            street_direction TEXT,
             street_name TEXT,
             zip_code TEXT,
             country TEXT
@@ -33,20 +34,29 @@ def index():
 @app.route('/submit-entry', methods=['POST'])
 def submit_entry():
     data = request.json
-    with sqlite3.connect('data.db') as conn:
-        cursor = conn.cursor()
-        cursor.execute('''INSERT INTO entries (customer_account, sap_s8, hotel_inn_code, marsha_code, starlink_code,
-                          trade_name, hotel_chain, affiliation, street_number, street_name, zip_code, country)
-                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
-                       (data['customer_account'], data['sap_s8'], data['hotel_inn_code'], data['marsha_code'],
-                        data['starlink_code'], data['trade_name'], data['hotel_chain'], data['affiliation'],
-                        data['street_number'], data['street_name'], data['zip_code'], data['country']))
-        conn.commit()
-    return jsonify({'message': 'Entry submitted successfully!', 'success': True})
+    # Debug log to check incoming data
+    print("Received data:", data)
+
+    # Insert entry with error handling
+    try:
+        with sqlite3.connect('database.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute('''INSERT INTO entries (customer_account, sap_s8, hotel_inn_code, marsha_code, starlink_code,
+                              trade_name, hotel_chain, affiliation, street_number, street_direction, street_name, zip_code, country)
+                              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                           (data.get('customer_account'), data.get('sap_s8'), data.get('hotel_inn_code'), data.get('marsha_code'),
+                            data.get('starlink_code'), data.get('trade_name'), data.get('hotel_chain'), data.get('affiliation'),
+                            data.get('street_number'), data.get('street_direction'), data.get('street_name'), data.get('zip_code'),
+                            data.get('country')))
+            conn.commit()
+        return jsonify({'message': 'Entry submitted successfully!', 'success': True})
+    except Exception as e:
+        print("Database insertion error:", e)
+        return jsonify({'message': 'Error inserting entry into the database.', 'success': False}), 500
 
 @app.route('/export-csv')
 def export_csv():
-    with sqlite3.connect('data.db') as conn:
+    with sqlite3.connect('database.db') as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM entries")
         entries = cursor.fetchall()
@@ -58,11 +68,10 @@ def export_csv():
         writer.writerows(entries)
     return send_file('entries.csv', as_attachment=True)
 
-@app.route('/generate-graphs')
-def generate_graphs():
-    # Call your Python scripts for generating graphs
-    os.system('python3 generate_graphs.py')  # Replace with actual script path
-    return jsonify({'message': 'Graphs generated successfully!'})
+# @app.route('/generate-graphs')
+# def generate_graphs():
+#     os.system('python3 generate_graphs.py')  # Replace with actual script path
+#     return jsonify({'message': 'Graphs generated successfully!'})
 
 if __name__ == '__main__':
     app.run(debug=True)
