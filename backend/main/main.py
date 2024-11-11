@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,send_file
 import sqlite3
+from graphs import heatmap as hm
 
 app = Flask(__name__, template_folder='../../frontend')
 
@@ -37,7 +38,8 @@ def insert():
 
 @app.route('/heatmap')
 def heatmap():
-    return
+    img = hm.create_heatmap()
+    return send_file(img, mimetype='image/png')
 
 if __name__ == '__main__':
     init_db()  
