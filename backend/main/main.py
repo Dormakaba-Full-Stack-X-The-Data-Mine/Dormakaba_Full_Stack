@@ -3,6 +3,7 @@ from db import create_table, add_entry
 import sqlite3
 import pandas as pd
 import io
+from graphs import heatmap as hm
 
 app = Flask(__name__)
 create_table()
@@ -43,6 +44,12 @@ def export_csv():
     df.to_csv(output, index=False)
     output.seek(0)
     return send_file(output, mimetype='text/csv', as_attachment=True, download_name='hotel_data.csv')
+
+    
+@app.route('/heatmap')
+def heatmap():
+    img = hm.create_heatmap()
+    return send_file(img, mimetype='image/png')
 
 if __name__ == '__main__':
     app.run(debug=True)
