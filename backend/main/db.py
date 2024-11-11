@@ -8,7 +8,7 @@ def create_table():
     conn = create_connection()
     cursor = conn.cursor()
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS users (
+    CREATE TABLE IF NOT EXISTS hotels (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         customer_account TEXT NOT NULL,
         sap_s8 TEXT NOT NULL,
@@ -31,32 +31,15 @@ def create_table():
 def add_entry(customer_account, sap_s8, hotel_inn_code, marsha_code, 
               starlink_code, vacation_rental, trade_name, hotel_chain, 
               affiliation, country, street_number, street_name, zip_code):
-    
     conn = create_connection()
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO users (customer_account, sap_s8, hotel_inn_code, marsha_code, 
-                           starlink_code, vacation_rental, trade_name, hotel_chain, 
-                           affiliation, country, street_number, street_name, zip_code) 
+        INSERT INTO hotels (customer_account, sap_s8, hotel_inn_code, marsha_code, 
+                            starlink_code, vacation_rental, trade_name, hotel_chain, 
+                            affiliation, country, street_number, street_name, zip_code) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ''', (customer_account, sap_s8, hotel_inn_code, marsha_code, starlink_code, 
           vacation_rental, trade_name, hotel_chain, affiliation, country, 
           street_number, street_name, zip_code))
     conn.commit()
     conn.close()
-
-def query_entries():
-    conn = create_connection()
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM users')
-    rows = cursor.fetchall()
-    conn.close()
-    return rows
-
-if __name__ == "__main__":
-    create_table()
-    
-    # Querying the entries to verify
-    entries = query_entries()
-    for entry in entries:
-        print(entry)
