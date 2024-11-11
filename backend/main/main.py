@@ -4,6 +4,7 @@ import sqlite3
 import pandas as pd
 import io
 from graphs import heatmap as hm
+from graphs import pie 
 
 app = Flask(__name__)
 create_table()
@@ -51,5 +52,9 @@ def heatmap():
     img = hm.create_heatmap()
     return send_file(img, mimetype='image/png')
 
+@app.route('/piechart')
+def piechart():
+    img = pie.create_pie_chart()
+    return send_file(img, mimetype='image/png')
 if __name__ == '__main__':
     app.run(debug=True)
