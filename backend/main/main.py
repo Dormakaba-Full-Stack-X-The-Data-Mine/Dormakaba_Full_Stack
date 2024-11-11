@@ -34,6 +34,11 @@ def insert():
         return f"Inserted {name} with value {value} into the database!"
     return "Failed to insert data."
 
+
+@app.route('/heatmap')
+def heatmap():
+    return
+
 if __name__ == '__main__':
     init_db()  
     app.run(debug=True)
