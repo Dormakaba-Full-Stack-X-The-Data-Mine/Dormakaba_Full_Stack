@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import io
 
 def create_heatmap():
-    conn = sqlite3.connect('your_database.db')
+    conn = sqlite3.connect('database.db')
     
     query = '''
         SELECT 
