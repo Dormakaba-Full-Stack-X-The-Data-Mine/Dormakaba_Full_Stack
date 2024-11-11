@@ -34,7 +34,7 @@ if __name__ == '__main__':
 app = Flask(__name__, template_folder='../../frontend')
 
 def init_db():
-    with sqlite3.connect('data.db') as conn:
+    with sqlite3.connect('database.db') as conn:
         cursor = conn.cursor()
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS hotels (
@@ -56,7 +56,7 @@ def init_db():
         conn.commit()
 
 def insert_hotel_data(data):
-    with sqlite3.connect('data.db') as conn:
+    with sqlite3.connect('database.db') as conn:
         cursor = conn.cursor()
         cursor.execute('''
             INSERT INTO hotels (
@@ -88,7 +88,7 @@ def insert():
 
 @app.route('/export-csv')
 def export_csv():
-    with sqlite3.connect('data.db') as conn:
+    with sqlite3.connect('database.db') as conn:
         df = pd.read_sql_query("SELECT * FROM hotels", conn)
     
     output = io.StringIO()
