@@ -3,10 +3,10 @@ from db import create_table, add_entry
 import sqlite3
 import pandas as pd
 import io
-from graphs import heatmap as hm
-from graphs import pie 
+##from graphs import heatmap as hm
+#from graphs import pie 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../../frontend/templates', static_folder='../../frontend/static')
 create_table()
 
 @app.route('/')
