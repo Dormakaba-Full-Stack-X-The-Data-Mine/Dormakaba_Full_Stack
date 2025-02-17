@@ -3,8 +3,8 @@ from db import create_table, add_entry
 import sqlite3
 import pandas as pd
 import io
-##from graphs import heatmap as hm
-#from graphs import pie 
+from graphs_maker.heatmap import create_heatmap as hm
+from graphs_maker.pie import create_pie_chart as pie 
 
 app = Flask(__name__, template_folder='../../frontend/templates', static_folder='../../frontend/static')
 create_table()
